@@ -1,14 +1,34 @@
 # MSE - Implementacion de Manejadores de Dispositivos
 
-### Consignas
+## Consignas
 1. Compilar kernel con soporte para BeableBoneBlack.
-1. Agregar nuevo dispositivo al device tree.
-2. Realizar un modulo de kernel que maneje un dispositivo I2C.
-3. Interfaz al dispositivo mediante char device.
-4. Programa en userspace que interactue con el módulo a través del char device.
+2. Agregar nuevo dispositivo al device tree.
+3. Realizar un modulo de kernel que maneje un dispositivo I2C a elección.
+4. Interfaz al dispositivo mediante char device.
+5. Programa en userspace que interactue con el módulo a través del char device.
 
+## Dispositivo a manejar
+Este modulo maneja la EEPROM M24M01-RDW6TP de 128 Kb presente en la placa 
+[RETRO-CIAA](http://www.retro-ciaa.com).
 
-### Instrucciones
+El ultimo bit de la direccion a acceder se indica en el ultimo bit de la 
+direccion I2C, de ahi que se especifiquen 2 dispositivos en el device tree
+ambos de 64 Kb y con direcciones contiguas. Por este motivo se exponen dos
+character devices, uno para cada area de 64 Kb.
+
+Basicamente el driver ya existe en linux/drivers/misc/eeprom/at24.c, pero 
+como ejercicio se implementara uno mas simple, adaptado a las necesidades
+del proyecto. 
+
+En particular, al firmware del proyecto RETRO-CIAA no le interesa acceder a 
+la EEPROM de a bytes sino de a paginas. En consecuencia, la forma de leer y
+escribir estos devices es exclusivamente de a una pagina entera a la vez.
+Se asume que el buffer pasado a las funciones "read" o "write" desde 
+userspace SIEMPRE tiene una capacidad de al menos STORAGE_PAGESIZE. Y se
+hace una interpretacion especial del parametro "len" para que indique no la
+cantidad de bytes sino el indice a la pagina deseada.
+
+## Instrucciones
 (Partiendo de un kernel ya configurado y compilado segun linux-kernel-labs)
 1. Clonar este proyecto en ~/linux-kernel-labs/modules/nfsroot/root
 2. Copiar am335x-customboneblack.dts a ~/linux-kernel-labs/src/linux/arch/arm/boot/dtb/
@@ -18,21 +38,21 @@
 6. Compilar kernel con $make dtbs
 7. Copiar zImage y custom dtb al servidor TFTP
 8. En el directorio de este módulo
-  8.1. Para compilar el kernel module: $ make
-  8.2. Para compilar la aplicacion de prueba en userspace: $ arm-linux-gnueabi-gcc rce_userspace.c -o rce_userspace
+   - Para compilar el kernel module: $ make
+   - Para compilar la aplicacion de prueba en userspace: $ arm-linux-gnueabi-gcc rce_userspace.c -o rce_userspace
 9. Bootear la BeagleBoneBlack con zImage, am335x-customboneblack.dts y filesystem por NFS. Los comandos de u-boot se encuentran en https://github.com/royconejo/mse-linux-imd/tree/master/notes
 
 
-### Pruebas en BeagleBoneBlack
-Existencia de los nuevos dispositivos definidos en el device tree
-```Shell
+## Pruebas en BeagleBoneBlack
+### Existencia de los nuevos dispositivos definidos en el device tree
+```ShellSession
 # find /sys/firmware/devicetree -name "*retrociaa*"
 /sys/firmware/devicetree/base/ocp/i2c@4802a000/retrociaa_eeprom0@56
 /sys/firmware/devicetree/base/ocp/i2c@4802a000/retrociaa_eeprom1@57
 ```
 
-Definición de los dispositivos
-```Shell
+### Definición de los dispositivos
+```ShellSession
 # dtc -I fs /sys/firmware/devicetree/base/ | grep retrociaa
 Warning (status_is_string): "status" property in /ocp/timer@48040000 is not a string
 Warning (status_is_string): "status" property in /ocp/timer@44e31000 is not a string
@@ -42,16 +62,16 @@ Warning (status_is_string): "status" property in /ocp/timer@44e31000 is not a st
 				compatible = "retrociaa,eeprom";
 ```
 
-Habilitación del adaptador i2c-1
-```Shell
+### Habilitación del adaptador i2c-1
+```ShellSession
 # i2cdetect -l
 i2c-1	i2c       	OMAP I2C adapter                	I2C adapter
 i2c-2	i2c       	OMAP I2C adapter                	I2C adapter
 i2c-0	i2c       	OMAP I2C adapter                	I2C adapter
 ```
 
-Detección de la EEPROM de la RETRO-CIAA
-```Shell
+### Detección de la EEPROM de la RETRO-CIAA
+```ShellSession
 # i2cdetect -r 1
 WARNING! This program can confuse your I2C bus, cause data loss and worse!
 I will probe file /dev/i2c-1 using read byte commands.
@@ -68,9 +88,9 @@ Continue? [Y/n] Y
 70: -- -- -- -- -- -- -- --                         
 ```
 
-Inserción del modulo en el kernel
-Notese el parametro "verbose=1"
-```Shell
+### Inserción del modulo en el kernel
+Notese el parametro **verbose=1**
+```ShellSession
 # cd /root/retrociaa_eeprom
 # insmod retrociaa_eeprom.ko verbose=1
 [ 7183.778217] retrociaa_eeprom: [in rce_init] Initializing...
@@ -83,23 +103,23 @@ Notese el parametro "verbose=1"
 [ 7183.853749] retrociaa_eeprom: [in rce_init] Initialized.
 ```
 
-Existencia de los nuevos char devices en su clase correspondiente
-```Shell
+### Existencia de los nuevos char devices en su clase correspondiente
+```ShellSession
 # cd /sys/class/retrociaa/
 # ls
 retrociaa_eeprom0  retrociaa_eeprom1
 ```
 
-Char devices listados en /dev
-```Shell
+### Char devices listados en /dev
+```ShellSession
 # cd /dev
 # ls | grep retrociaa
 retrociaa_eeprom0
 retrociaa_eeprom1
 ```
 
-Acceso a los char devices
-```Shell
+### Acceso a los char devices
+```ShellSession
 # cat /dev/retrociaa_eeprom1 1>& /dev/null
 [11695.053589] retrociaa_eeprom: [in chd_open] Params inodep '1fef571d', filep '101698d8'.
 [11695.062015] retrociaa_eeprom: [in get_client_by_file] File access granted for client '1', name 'eeprom'.
@@ -110,22 +130,22 @@ Acceso a los char devices
 [11695.113920] retrociaa_eeprom: [in get_client_by_file] File access granted for client '1', name 'eeprom'.
 ```
 
-Remoción del modulo del kernel
-```Shell
+### Remoción del modulo del kernel
+```ShellSession
 # rmmod retrociaa_eeprom.ko
 [ 7351.152496] retrociaa_eeprom: [in rce_exit] Shutting down...
 [ 7351.164925] retrociaa_eeprom: [in rce_exit] Goodbye.
 ```
 
-Nueva inserción del modulo
-Notar la falta del parametro "verbose"
-```Shell
+### Nueva inserción del modulo
+Notar la falta del parametro **verbose**
+```ShellSession
 # cd /root/retrociaa_eeprom
 # insmod retrociaa_eeprom.ko
 ```
 
-Prueba de acceso a los device char desde aplicación en userspace
-```Shell
+### Prueba de acceso a los device char desde aplicación en userspace
+```ShellSession
 # cd /root/retrociaa_eeprom
 # ./rce_userspace
 Userland INFO: Opening char device at '/dev/retrociaa_eeprom0'...
