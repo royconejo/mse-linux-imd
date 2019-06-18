@@ -24,7 +24,7 @@ character devices, uno para cada area de 64 Kb.
 El driver para estos dispositivos [ya existe](https://github.com/torvalds/linux/blob/master/drivers/misc/eeprom/at24.c), pero como ejercicio se implementa uno mas simple, adaptado a las necesidades del proyecto. 
 
 En particular, al firmware del proyecto RETRO-CIAA no le interesa acceder a 
-la EEPROM de a bytes sino de a paginas. En consecuencia, la forma de leer y
+la EEPROM de a bytes sino de a paginas; la forma de leer y
 escribir estos devices es exclusivamente de a una pagina entera a la vez.
 Se asume que el buffer pasado a las funciones "read" o "write" desde 
 userspace SIEMPRE tiene una capacidad de al menos STORAGE_PAGESIZE. Y se
