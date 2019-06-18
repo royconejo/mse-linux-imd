@@ -31,6 +31,10 @@ userspace SIEMPRE tiene una capacidad de al menos STORAGE_PAGESIZE. Y se
 hace una interpretacion especial del parametro "len" para que indique no la
 cantidad de bytes sino el indice a la pagina deseada.
 
+## Testbench
+BeagleBoneBlack Rev.A6, Placa de expansión RETRO-CIAA v1.0.2, Adaptador USB-TTL UART.
+![Testbench](/images/testbench.jpg)
+
 ## Instrucciones
 (Partiendo de un kernel ya configurado y compilado segun linux-kernel-labs)
 1. Clonar este proyecto en ~/linux-kernel-labs/modules/nfsroot/root
