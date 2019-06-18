@@ -36,7 +36,7 @@ BeagleBoneBlack Rev.A6, Placa de expansión RETRO-CIAA v1.0.2, Adaptador USB-TTL
 ![Testbench](/images/testbench.jpg)
 
 ## Instrucciones
-(Partiendo de un kernel ya configurado y compilado segun linux-kernel-labs)
+(Partiendo de un kernel ya configurado y compilado segun [linux-kernel-labs](https://github.com/royconejo/mse-linux-imd/tree/master/linux-kernel-labs))
 1. Clonar este proyecto en ~/linux-kernel-labs/modules/nfsroot/root
 2. Copiar am335x-customboneblack.dts a ~/linux-kernel-labs/src/linux/arch/arm/boot/dtb/
 3. Agregar custom dtb a Makefile en ese directorio
