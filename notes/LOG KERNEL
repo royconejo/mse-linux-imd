@@ -1,0 +1,207 @@
+===================================================================
+NOTA: esto es lo que deberian ver al bootear el kernel desde u-boot
+===================================================================
+
+U-Boot# bootz 0x81000000 - 0x82000000
+## Flattened Device Tree blob at 82000000
+   Booting using the fdt blob at 0x82000000
+   Using Device Tree in place at 82000000, end 8200b7dd
+
+Starting kernel ...
+
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Linux version 4.19.41 (royconejo@ultraconejo) (gcc version 6.3.0 20170516 (Debian 6.3.0-18)) #1 SMP Fri May 17 12:55:31 -03 2019
+[    0.000000] CPU: ARMv7 Processor [413fc082] revision 2 (ARMv7), cr=10c5387d
+[    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
+[    0.000000] OF: fdt: Machine model: TI AM335x BeagleBone Black
+[    0.000000] Memory policy: Data cache writeback
+[    0.000000] cma: Reserved 16 MiB at 0x9e800000
+[    0.000000] CPU: All CPU(s) started in SVC mode.
+[    0.000000] AM335X ES2.0 (sgx neon)
+[    0.000000] random: get_random_bytes called from start_kernel+0x8c/0x4a4 with crng_init=0
+[    0.000000] percpu: Embedded 18 pages/cpu s42088 r8192 d23448 u73728
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 129412
+[    0.000000] Kernel command line: root=/dev/nfs rw ip=192.168.0.100 console=ttyO0,115200n8 g_ether.dev_addr=f8:dc:7a:00:00:02 g_ether.host_addr=f8:dc:7a:00:00:01 nfsroot=192.168.0.1:/home/royconejo/MSE/2do_bimestre/Implementacion_de_Manjeadores_de_Dispositivos/linux-kernel-labs/modules/nfsroot,nfsvers=3
+[    0.000000] Dentry cache hash table entries: 65536 (order: 6, 262144 bytes)
+[    0.000000] Inode-cache hash table entries: 32768 (order: 5, 131072 bytes)
+[    0.000000] Memory: 478964K/522240K available (9216K kernel code, 803K rwdata, 2660K rodata, 1024K init, 7475K bss, 26892K reserved, 16384K cma-reserved, 0K highmem)
+[    0.000000] Virtual kernel memory layout:
+[    0.000000]     vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+[    0.000000]     fixmap  : 0xffc00000 - 0xfff00000   (3072 kB)
+[    0.000000]     vmalloc : 0xe0000000 - 0xff800000   ( 504 MB)
+[    0.000000]     lowmem  : 0xc0000000 - 0xdfe00000   ( 510 MB)
+[    0.000000]     pkmap   : 0xbfe00000 - 0xc0000000   (   2 MB)
+[    0.000000]     modules : 0xbf000000 - 0xbfe00000   (  14 MB)
+[    0.000000]       .text : 0x(ptrval) - 0x(ptrval)   (10208 kB)
+[    0.000000]       .init : 0x(ptrval) - 0x(ptrval)   (1024 kB)
+[    0.000000]       .data : 0x(ptrval) - 0x(ptrval)   ( 804 kB)
+[    0.000000]        .bss : 0x(ptrval) - 0x(ptrval)   (7476 kB)
+[    0.000000] Running RCU self tests
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] rcu: 	RCU event tracing is enabled.
+[    0.000000] rcu: 	RCU lockdep checking is enabled.
+[    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=2 to nr_cpu_ids=1.
+[    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=1
+[    0.000000] NR_IRQS: 16, nr_irqs: 16, preallocated irqs: 16
+[    0.000000] IRQ: Found an INTC at 0x(ptrval) (revision 5.0) with 128 interrupts
+[    0.000000] OMAP clockevent source: timer2 at 24000000 Hz
+[    0.000026] sched_clock: 32 bits at 24MHz, resolution 41ns, wraps every 89478484971ns
+[    0.000078] clocksource: timer1: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 79635851949 ns
+[    0.000174] OMAP clocksource: timer1 at 24000000 Hz
+[    0.001058] timer_probe: no matching timers found
+[    0.002659] Console: colour dummy device 80x30
+[    0.002764] WARNING: Your 'console=ttyO0' has been replaced by 'ttyS0'
+[    0.002795] This ensures that you still see kernel messages. Please
+[    0.002823] update your kernel commandline.
+[    0.002853] Lock dependency validator: Copyright (c) 2006 Red Hat, Inc., Ingo Molnar
+[    0.002881] ... MAX_LOCKDEP_SUBCLASSES:  8
+[    0.002909] ... MAX_LOCK_DEPTH:          48
+[    0.002937] ... MAX_LOCKDEP_KEYS:        8191
+[    0.002965] ... CLASSHASH_SIZE:          4096
+[    0.002993] ... MAX_LOCKDEP_ENTRIES:     32768
+[    0.003021] ... MAX_LOCKDEP_CHAINS:      65536
+[    0.003048] ... CHAINHASH_SIZE:          32768
+[    0.003077]  memory used by lock dependency info: 4655 kB
+[    0.003105]  per task-struct memory footprint: 1536 bytes
+[    0.003240] Calibrating delay loop... 545.58 BogoMIPS (lpj=2727936)
+[    0.097546] pid_max: default: 32768 minimum: 301
+[    0.098304] Security Framework initialized
+[    0.098546] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes)
+[    0.098591] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes)
+[    0.104243] CPU: Testing write buffer coherency: ok
+[    0.104545] CPU0: Spectre v2: using BPIALL workaround
+[    0.106945] CPU0: thread -1, cpu 0, socket -1, mpidr 0
+[    0.111260] Setting up static identity map for 0x80100000 - 0x80100078
+[    0.112358] rcu: Hierarchical SRCU implementation.
+[    0.115709] smp: Bringing up secondary CPUs ...
+[    0.115760] smp: Brought up 1 node, 1 CPU
+[    0.115795] SMP: Total of 1 processors activated (545.58 BogoMIPS).
+[    0.115828] CPU: All CPU(s) started in SVC mode.
+[    0.122861] devtmpfs: initialized
+[    0.169995] VFP support v0.3: implementor 41 architecture 3 part 30 variant c rev 3
+[    0.171333] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.171446] futex hash table entries: 256 (order: 2, 16384 bytes)
+[    0.173885] pinctrl core: initialized pinctrl subsystem
+[    0.182509] NET: Registered protocol family 16
+[    0.194714] DMA: preallocated 256 KiB pool for atomic coherent allocations
+[    0.292569] l4_wkup_cm:clk:0010:0: failed to disable
+[    0.351102] audit: initializing netlink subsys (disabled)
+[    0.355675] cpuidle: using governor menu
+[    0.379771] audit: type=2000 audit(0.350:1): state=initialized audit_enabled=0 res=1
+[    0.382039] OMAP GPIO hardware version 0.1
+[    0.425251] No ATAGs?
+[    0.425293] hw-breakpoint: debug architecture 0x4 unsupported.
+[    0.425940] omap4_sram_init:Unable to allocate sram needed to handle errata I688
+[    0.425985] omap4_sram_init:Unable to get sram pool needed to handle errata I688
+[    0.492959] edma 49000000.edma: TI EDMA DMA engine driver
+[    0.503860] vgaarb: loaded
+[    0.505668] SCSI subsystem initialized
+[    0.509372] pps_core: LinuxPPS API ver. 1 registered
+[    0.509423] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.509522] PTP clock support registered
+[    0.516630] clocksource: Switched to clocksource timer1
+[    0.810649] VFS: Disk quotas dquot_6.6.0
+[    0.810967] VFS: Dquot-cache hash table entries: 1024 (order 0, 4096 bytes)
+[    0.858935] NET: Registered protocol family 2
+[    0.862567] tcp_listen_portaddr_hash hash table entries: 256 (order: 1, 10240 bytes)
+[    0.862719] TCP established hash table entries: 4096 (order: 2, 16384 bytes)
+[    0.862889] TCP bind hash table entries: 4096 (order: 5, 147456 bytes)
+[    0.863933] TCP: Hash tables configured (established 4096 bind 4096)
+[    0.864568] UDP hash table entries: 256 (order: 2, 20480 bytes)
+[    0.864772] UDP-Lite hash table entries: 256 (order: 2, 20480 bytes)
+[    0.865493] NET: Registered protocol family 1
+[    0.870450] RPC: Registered named UNIX socket transport module.
+[    0.870594] RPC: Registered udp transport module.
+[    0.870628] RPC: Registered tcp transport module.
+[    0.870662] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    0.876103] hw perfevents: enabled with armv7_cortex_a8 PMU driver, 5 counters available
+[    0.884936] Initialise system trusted keyrings
+[    0.886889] workingset: timestamp_bits=14 max_order=17 bucket_order=3
+[    0.892400] NFS: Registering the id_resolver key type
+[    0.892706] Key type id_resolver registered
+[    0.892832] Key type id_legacy registered
+[    0.893136] jffs2: version 2.2. (NAND) (SUMMARY)  © 2001-2006 Red Hat, Inc.
+[    0.907233] Key type asymmetric registered
+[    0.907560] Asymmetric key parser 'x509' registered
+[    0.907860] io scheduler noop registered
+[    0.907905] io scheduler deadline registered
+[    0.908186] io scheduler cfq registered (default)
+[    0.908232] io scheduler mq-deadline registered
+[    0.908268] io scheduler kyber registered
+[    0.913034] pinctrl-single 44e10800.pinmux: 142 pins, size 568
+[    0.927777] Serial: 8250/16550 driver, 6 ports, IRQ sharing enabled
+[    0.950619] 44e09000.serial: ttyS0 at MMIO 0x44e09000 (irq = 30, base_baud = 3000000) is a 8250
+[    1.676110] console [ttyS0] enabled
+[    1.735478] brd: module loaded
+[    1.785349] loop: module loaded
+[    1.793080] mtdoops: mtd device (mtddev=name/number) must be supplied
+[    1.805285] libphy: Fixed MDIO Bus: probed
+[    1.886579] davinci_mdio 4a101000.mdio: davinci mdio revision 1.6, bus freq 1000000
+[    1.894385] davinci_mdio 4a101000.mdio: detected phy mask fffffffe
+[    1.908195] libphy: 4a101000.mdio: probed
+[    1.912304] davinci_mdio 4a101000.mdio: phy[0]: device 4a101000.mdio:00, driver SMSC LAN8710/LAN8720
+[    1.924373] cpsw 4a100000.ethernet: Detected MACID = 90:59:af:49:95:f6
+[    1.931795] cpsw 4a100000.ethernet: initialized cpsw ale version 1.4
+[    1.938389] cpsw 4a100000.ethernet: ALE Table size 1024
+[    1.943766] cpsw 4a100000.ethernet: cpts: overflow check period 500 (jiffies)
+[    1.993784] udc-core: couldn't find an available UDC - added [g_ether] to list of pending drivers
+[    2.003105] i2c /dev entries driver
+[    2.012888] sdhci: Secure Digital Host Controller Interface driver
+[    2.019383] sdhci: Copyright(c) Pierre Ossman
+[    2.026083] omap_gpio 44e07000.gpio: Could not set line 6 debounce to 200000 microseconds (-22)
+[    2.035068] omap_hsmmc 48060000.mmc: Got CD GPIO
+[    2.042648] omap_hsmmc 48060000.mmc: Linked as a consumer to regulator.1
+[    2.081953] omap_hsmmc 481d8000.mmc: Linked as a consumer to regulator.1
+[    2.117199] sdhci-pltfm: SDHCI platform and OF driver helper
+[    2.124064] ledtrig-cpu: registered to indicate activity on CPUs
+[    2.135327] oprofile: using arm/armv7
+[    2.140470] Initializing XFRM netlink socket
+[    2.145623] NET: Registered protocol family 10
+[    2.157152] Segment Routing with IPv6
+[    2.161195] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[    2.170518] NET: Registered protocol family 17
+[    2.175140] NET: Registered protocol family 15
+[    2.180404] Key type dns_resolver registered
+[    2.185018] ThumbEE CPU extension supported.
+[    2.189608] Registering SWP/SWPB emulation handler
+[    2.194465] omap_voltage_late_init: Voltage driver support not added
+[    2.201007] sr_dev_init: Unknown instance smartreflex0
+[    2.207054] SmartReflex Class3 initialized
+[    2.217163] Loading compiled-in X.509 certificates
+[    2.321728] random: fast init done
+[    2.361460] mmc1: new high speed MMC card at address 0001
+[    2.375776] mmcblk1: mmc1:0001 MMC02G 1.79 GiB 
+[    2.383857] mmcblk1boot0: mmc1:0001 MMC02G partition 1 1.00 MiB
+[    2.393229] mmcblk1boot1: mmc1:0001 MMC02G partition 2 1.00 MiB
+[    2.402123] mmcblk1rpmb: mmc1:0001 MMC02G partition 3 128 KiB, chardev (248:0)
+[    2.425804]  mmcblk1: p1 p2
+[    2.469188] tps65217 0-0024: TPS65217 ID 0xe version 1.2
+[    2.476483] omap_i2c 44e0b000.i2c: bus 0 rev0.11 at 400 kHz
+[    2.488859] omap_i2c 4819c000.i2c: bus 2 rev0.11 at 100 kHz
+[    2.509059] hctosys: unable to open rtc device (rtc0)
+[    2.514198] sr_init: No PMIC hook to init smartreflex
+[    2.543319] net eth0: initializing cpsw version 1.12 (0)
+[    2.648237] SMSC LAN8710/LAN8720 4a101000.mdio:00: attached PHY driver [SMSC LAN8710/LAN8720] (mii_bus:phy_addr=4a101000.mdio:00, irq=POLL)
+[    2.675620] IPv6: ADDRCONF(NETDEV_UP): eth0: link is not ready
+[    4.727934] cpsw 4a100000.ethernet eth0: Link is Up - 100Mbps/Full - flow control rx/tx
+[    4.746724] IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+[    4.776504] IP-Config: Guessing netmask 255.255.255.0
+[    4.781631] IP-Config: Complete:
+[    4.784908]      device=eth0, hwaddr=90:59:af:49:95:f6, ipaddr=192.168.0.100, mask=255.255.255.0, gw=255.255.255.255
+[    4.798429]      host=192.168.0.100, domain=, nis-domain=(none)
+[    4.804428]      bootserver=255.255.255.255, rootserver=192.168.0.1, rootpath=
+[    4.864677] VFS: Mounted root (nfs filesystem) on device 0:15.
+[    4.874765] devtmpfs: mounted
+[    4.881917] Freeing unused kernel memory: 1024K
+[    4.888203] Run /sbin/init as init process
+Starting logging: OK
+Initializing random number generator... [    6.138239] random: dd: uninitialized urandom read (512 bytes read)
+done.
+Starting network...
+ip: RTNETLINK answers: File exists
+Starting dropbear sshd: [    6.592577] random: dropbear: uninitialized urandom read (32 bytes read)
+OK
+
+Welcome to Buildroot
+buildroot login: 
+

@@ -1,0 +1,21 @@
+=====================================================================================
+Comandos para u-boot usando cable ethernet (ejecutar de a uno en el prompt de u-boot)
+
+IMPORTANTE! 
+
+cambiar "/home/royconejo" por el propio usuario y path a linux-kernel-labs!
+=====================================================================================
+
+setenv ipaddr 192.168.1.100
+setenv serverip 192.168.1.1
+tftp 0x81000000 zImage
+------------------------------------------
+tftp 0x82000000 am335x-boneblack.dtb
+------------------------------------------
+o bien
+------------------------------------------
+tftp 0x82000000 am335x-customboneblack.dtb
+------------------------------------------
+setenv bootargs root=/dev/nfs rw ip=192.168.1.100 console=ttyS0,115200n8 g_ether.dev_addr=f8:dc:7a:00:01:02 g_ether.host_addr=f8:dc:7a:00:01:01 nfsroot=192.168.1.1:/home/royconejo/linux-kernel-labs/modules/nfsroot,nfsvers=3
+bootz 0x81000000 - 0x82000000
+
