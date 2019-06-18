@@ -7,8 +7,13 @@
 4. Interfaz al dispositivo mediante char device.
 5. Programa en userspace que interactue con el módulo a través del char device.
 
+## Entregables
+- Device Tree modificado: [am335x-customboneblack.dts](https://github.com/royconejo/mse-linux-imd/blob/master/am335x-customboneblack.dts)
+- Modulo manejador de dispositivos: [retrociaa_eeprom.c](https://github.com/royconejo/mse-linux-imd/blob/master/retrociaa_eeprom.c)
+- Aplicación en userspace: [rce_userspace.c](https://github.com/royconejo/mse-linux-imd/blob/master/rce_userspace.c)
+
 ## Dispositivo a manejar
-Este modulo maneja la EEPROM M24M01-RDW6TP de 128 Kb presente en la placa 
+Este modulo maneja la EEPROM [M24M01-RDW6TP](https://www.st.com/resource/en/datasheet/m24m01-r.pdf) de 128 Kb presente en la placa 
 [RETRO-CIAA](http://www.retro-ciaa.com).
 
 El ultimo bit de la direccion a acceder se indica en el ultimo bit de la 
@@ -16,7 +21,7 @@ direccion I2C, de ahi que se especifiquen 2 dispositivos en el device tree
 ambos de 64 Kb y con direcciones contiguas. Por este motivo se exponen dos
 character devices, uno para cada area de 64 Kb.
 
-Basicamente el driver ya existe en linux/drivers/misc/eeprom/at24.c, pero 
+El driver [ya existe](https://github.com/torvalds/linux/blob/master/drivers/misc/eeprom/at24.c), pero 
 como ejercicio se implementara uno mas simple, adaptado a las necesidades
 del proyecto. 
 
