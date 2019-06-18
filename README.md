@@ -21,9 +21,7 @@ direccion I2C, de ahi que se especifiquen 2 dispositivos en el device tree
 ambos de 64 Kb y con direcciones contiguas. Por este motivo se exponen dos
 character devices, uno para cada area de 64 Kb.
 
-El driver [ya existe](https://github.com/torvalds/linux/blob/master/drivers/misc/eeprom/at24.c), pero 
-como ejercicio se implementara uno mas simple, adaptado a las necesidades
-del proyecto. 
+El driver para estos dispositivos [ya existe](https://github.com/torvalds/linux/blob/master/drivers/misc/eeprom/at24.c), pero como ejercicio se implementa uno mas simple, adaptado a las necesidades del proyecto. 
 
 En particular, al firmware del proyecto RETRO-CIAA no le interesa acceder a 
 la EEPROM de a bytes sino de a paginas. En consecuencia, la forma de leer y
